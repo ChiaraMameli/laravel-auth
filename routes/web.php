@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/admin', 'Admin\HomeController@index')->name('admin.home');
 
 Auth::routes(['register' => false]);
 
@@ -23,8 +22,11 @@ Route::middleware('auth')
 ->namespace('Admin')
 ->name('admin.')
 ->group(function(){
+    
+    Route::get('', 'HomeController@index')->name('admin.home');
+
     // Posts
-    // Route::resource('posts', 'PostController');
+    Route::resource('posts', 'PostController');
 
     Route::get('/{any}', function () {
         abort('404');
