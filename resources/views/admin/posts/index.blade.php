@@ -23,6 +23,11 @@
                     <div class="btn-group" role="group">
                         <a href="{{route('admin.posts.show', $post)}}" class="btn btn-secondary">Vedi</a>
                         <a href="{{route('admin.posts.edit', $post)}}" class="btn btn-warning">Update</a>
+                        <form action="{{route('admin.posts.destroy', $post)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </td>
             </tr>
