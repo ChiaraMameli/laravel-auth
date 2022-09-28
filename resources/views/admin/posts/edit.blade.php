@@ -10,6 +10,15 @@
                 <input type="text" class="form-control" id="title" name="title">
             </div>
             <div class="form-group">
+                <label for="category_id">Category</label>
+                <select class="form-control" id="category_id" name="category_id">
+                    <option value="">No category</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->label}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="content">Content</label>
                 <input type="text" class="form-control" id="content" name="content">
             </div>
