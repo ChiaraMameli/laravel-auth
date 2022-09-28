@@ -22,6 +22,7 @@
                 <td>
                     <div class="btn-group" role="group">
                         <a href="{{route('admin.posts.show', $post)}}" class="btn btn-secondary">Vedi</a>
+                        <a href="{{route('admin.posts.edit', $post)}}" class="btn btn-warning">Update</a>
                     </div>
                 </td>
             </tr>

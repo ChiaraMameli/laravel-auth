@@ -15,6 +15,7 @@
             </div>
             <div class="card-footer">
                 <a href="{{route('admin.posts.index', $post)}}" class="btn btn-secondary">Back</a>
+                <a href="{{route('admin.posts.edit', $post)}}" class="btn btn-warning">Update</a>
             </div>
         </div>
     </div>
