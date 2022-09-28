@@ -26,7 +26,10 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <ul class="navbar-nav ml-auto"><li><a class="nav-link" href="{{ route('admin.posts.index') }}">Posts</a></li></ul>
+                <ul class="navbar-nav ml-auto">
+                    <li><a class="nav-link" href="{{ route('admin.posts.index') }}">Posts</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.posts.create') }}">Create new post</a></li>
+                </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
