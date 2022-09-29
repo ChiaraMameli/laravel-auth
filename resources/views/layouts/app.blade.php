@@ -12,6 +12,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/3395c408c6.js" crossorigin="anonymous"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -28,7 +31,6 @@
                 </a>
                 <ul class="navbar-nav ml-auto">
                     <li><a class="nav-link" href="{{ route('admin.posts.index') }}">Posts</a></li>
-                    <li><a class="nav-link" href="{{ route('admin.posts.create') }}">Create new post</a></li>
                 </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
