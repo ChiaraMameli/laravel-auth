@@ -23,8 +23,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ url('/admin') }}">
+                    WordPress
                 </a>
                 <ul class="navbar-nav ml-auto">
                     <li><a class="nav-link" href="{{ route('admin.posts.index') }}">Posts</a></li>
