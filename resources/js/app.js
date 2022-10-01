@@ -1,2 +1,3 @@
 require('./bootstrap');
-require('./delete_confirm');
+require('./utilities/delete_confirm');
+require('./utilities/image_preview');

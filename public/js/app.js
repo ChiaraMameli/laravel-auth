@@ -37297,7 +37297,9 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./delete_confirm */ "./resources/js/delete_confirm.js");
+__webpack_require__(/*! ./utilities/delete_confirm */ "./resources/js/utilities/delete_confirm.js");
+
+__webpack_require__(/*! ./utilities/image_preview */ "./resources/js/utilities/image_preview.js");
 
 /***/ }),
 
@@ -37346,10 +37348,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/delete_confirm.js":
-/*!****************************************!*\
-  !*** ./resources/js/delete_confirm.js ***!
-  \****************************************/
+/***/ "./resources/js/utilities/delete_confirm.js":
+/*!**************************************************!*\
+  !*** ./resources/js/utilities/delete_confirm.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -37360,6 +37362,24 @@ deleteForm.forEach(function (form) {
     var hasConfirmed = confirm('You really want to delete this post?');
     if (hasConfirmed) form.submit();
   });
+});
+
+/***/ }),
+
+/***/ "./resources/js/utilities/image_preview.js":
+/*!*************************************************!*\
+  !*** ./resources/js/utilities/image_preview.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var imagePreview = document.getElementById('image-preview');
+var imageField = document.getElementById('image-field');
+var placeholder = "https://troianiortodonzia.it/wp-content/uploads/2016/10/orionthemes-placeholder-image.png";
+imageField.addEventListener('input', function () {
+  var _imageField$value;
+
+  imagePreview.src = (_imageField$value = imageField.value) !== null && _imageField$value !== void 0 ? _imageField$value : placeholder;
 });
 
 /***/ }),
