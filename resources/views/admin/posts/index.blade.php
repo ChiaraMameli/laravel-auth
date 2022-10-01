@@ -13,6 +13,7 @@
         <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
+        <th scope="col">Category</th>
         <th scope="col">Content</th>
         <th scope="col">Last update</th>
         <th scope="col">Actions</th>
@@ -23,6 +24,11 @@
             <tr>
                 <th scope="row">{{$post->id}}</th>
                 <td>{{$post->title}}</td>
+                @if($post->category)
+                    <td><span class="badge badge-pill badge-{{$post->category->color}}">{{$post->category->label}}</span></td>
+                @else
+                    <td>No category found</td>
+                @endif
                 <td>{{$post->content}}</td>
                 <td>{{$post->updated_at}}</td>
                 <td>

@@ -20,8 +20,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('updated_at', 'DESC')->orderBy('created_at', 'DESC')->paginate(10);
+        $categories = Category::all();
 
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.posts.index', compact('posts', 'categories'));
     }
 
     /**
@@ -48,6 +49,8 @@ class PostController extends Controller
             'title' => 'required|string|min:1|max:50|unique:posts',
             'content' => 'nullable|string',
             'image' => 'nullable|url',
+            'category_id' => 'nullable|exists:categories, id',
+
         ],
         [
             'title.required' => 'This field cannot be left blank',
@@ -58,7 +61,10 @@ class PostController extends Controller
 
             'content.string' => 'The file format is invalid',
 
-            'image.url' => 'The file format is invalid'
+            'image.url' => 'The file format is invalid',
+
+            'category_id.exists' => 'Selected category does not exists',
+
         ]);
 
 
@@ -84,7 +90,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('admin.posts.show', compact('post'));
+        $categories = Category::all();
+
+        return view('admin.posts.show', compact('post', 'categories'));
     }
 
     /**
@@ -112,6 +120,7 @@ class PostController extends Controller
             'title' => ['required', 'string', 'min:1', 'max:50', Rule::unique('posts')->ignore($post->id)],
             'content' => 'nullable|string',
             'image' => 'nullable|url',
+            'category_id' => 'nullable|exists:categories,id',
         ],
         [
             'title.required' => 'This field cannot be left blank',
@@ -122,7 +131,10 @@ class PostController extends Controller
 
             'content.string' => 'The file format is invalid',
 
-            'image.url' => 'The file format is invalid'
+            'image.url' => 'The file format is invalid',
+
+            'category_id.exists' => 'Selected category does not exists',
+
         ]);
 
         $data = $request->all();
