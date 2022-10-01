@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 
@@ -44,13 +45,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string',
+            'title' => 'required|string|min:1|max:50|unique:posts',
             'content' => 'nullable|string',
             'image' => 'nullable|url',
         ],
         [
             'title.required' => 'This field cannot be left blank',
             'title.string' => 'The file format is invalid',
+            'title.unique' => "$request->title alredy exists",
+            'title.min' => "$request->title is too short",
+            'title.max' => "$request->title is too long",
 
             'content.string' => 'The file format is invalid',
 
@@ -104,11 +108,30 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'min:1', 'max:50', Rule::unique('posts')->ignore($post->id)],
+            'content' => 'nullable|string',
+            'image' => 'nullable|url',
+        ],
+        [
+            'title.required' => 'This field cannot be left blank',
+            'title.string' => 'The file format is invalid',
+            'title.unique' => "$request->title alredy exists",
+            'title.min' => "$request->title is too short",
+            'title.max' => "$request->title is too long",
+
+            'content.string' => 'The file format is invalid',
+
+            'image.url' => 'The file format is invalid'
+        ]);
+
         $data = $request->all();
+
+        $data['slug'] = Str::slug($request->title, '-');
 
         $post->update($data);
 
-        return view('admin.posts.show', compact('post'));
+        return redirect()->route('admin.posts.show', $post)->with('message', 'Post was successfully edited')->with('type', 'success');
     }
 
     /**
