@@ -14,7 +14,7 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Content</th>
-        <th scope="col">Image</th>
+        <th scope="col">Last update</th>
         <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -24,7 +24,7 @@
                 <th scope="row">{{$post->id}}</th>
                 <td>{{$post->title}}</td>
                 <td>{{$post->content}}</td>
-                <td><img src="{{$post->image}}" alt="{{$post->title}}" class="img-fluid"></td>
+                <td>{{$post->updated_at}}</td>
                 <td>
                     <div class="d-flex">
                         <a href="{{route('admin.posts.show', $post)}}" class="btn btn-primary btn-sm ml-1"><i class="fa-solid fa-eye"></i></a>
@@ -39,7 +39,7 @@
             </tr>
         @empty
             <tr>
-                <td>No post found</td>
+                <td colspan="5">No posts found</td>
             </tr>
         @endforelse
     </tbody>
