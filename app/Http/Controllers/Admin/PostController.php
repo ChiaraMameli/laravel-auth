@@ -43,13 +43,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'content' => 'nullable|string',
+            'image' => 'nullable|url',
+        ],
+        [
+            'title.required' => 'This field cannot be left blank',
+            'title.string' => 'The file format is invalid',
+
+            'content.string' => 'The file format is invalid',
+
+            'image.url' => 'The file format is invalid'
+        ]);
+
+
         $data = $request->all();
 
         $post = new Post();
 
-        $post->title = $data['title'];
-        $post->content = $data['content'];
-        $post->image = $data['image'];
+        $post->fill($data);
+        
         $post->slug = Str::slug($data['title'], '-');
 
         $post->save();
