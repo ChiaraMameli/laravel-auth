@@ -30,7 +30,6 @@
                     WordPress
                 </a>
                 <ul class="navbar-nav ml-auto">
-                    <li><a class="nav-link" href="{{ route('admin.posts.index') }}">Posts</a></li>
                 </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -39,7 +38,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li><a class="nav-link @if(Route::is('admin.posts.index')) active @endif" href="{{ route('admin.posts.index') }}">Posts</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
