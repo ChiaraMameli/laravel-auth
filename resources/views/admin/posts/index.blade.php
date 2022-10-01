@@ -44,5 +44,10 @@
         @endforelse
     </tbody>
     </table>
+    <div>
+        @if($posts->hasPages())
+            {{$posts->links()}}
+        @endif
+    </div>
 </div>
 @endsection

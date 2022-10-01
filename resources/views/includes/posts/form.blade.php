@@ -44,7 +44,10 @@
         <div class="col-2 form-group">
             <img id="image-preview" class="img-fluid rounded" src="https://troianiortodonzia.it/wp-content/uploads/2016/10/orionthemes-placeholder-image.png" alt="placeholder">
         </div>
-        <button type="submit" class="btn btn-primary ml-3">{{$post->exists ? 'Edit' : 'Save'}}</button>
+
+        <a href="{{route('admin.posts.index', $post)}}" class="btn btn-secondary ml-3"><i class="fa-solid fa-rotate-left"></i> Go Back</a>
+        <div class="col-10"></div>
+        <button type="submit" class="btn btn-primary align-self-end">{{$post->exists ? 'Edit' : 'Save'}}</button>
     </div>
     </form>
 </div>
