@@ -37297,6 +37297,8 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./delete_confirm */ "./resources/js/delete_confirm.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37341,6 +37343,24 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/delete_confirm.js":
+/*!****************************************!*\
+  !*** ./resources/js/delete_confirm.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var deleteForm = document.querySelectorAll('.delete-form');
+deleteForm.forEach(function (form) {
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var hasConfirmed = confirm('You really want to delete this post?');
+    if (hasConfirmed) form.submit();
+  });
+});
 
 /***/ }),
 

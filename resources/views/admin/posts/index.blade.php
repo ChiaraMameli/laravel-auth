@@ -29,7 +29,7 @@
                     <div class="d-flex">
                         <a href="{{route('admin.posts.show', $post)}}" class="btn btn-primary btn-sm ml-1"><i class="fa-solid fa-eye"></i></a>
                         <a href="{{route('admin.posts.edit', $post)}}" class="btn btn-warning btn-sm ml-1"><i class="fa-solid fa-pencil"></i></a>
-                        <form action="{{route('admin.posts.destroy', $post)}}" method="POST">
+                        <form action="{{route('admin.posts.destroy', $post)}}" method="POST" class="delete-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm ml-1"><i class="fa-solid fa-trash"></i></button>

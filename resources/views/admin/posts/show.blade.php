@@ -21,7 +21,7 @@
                 <a href="{{route('admin.posts.index', $post)}}" class="btn btn-secondary"><i class="fa-solid fa-rotate-left"></i> Go Back</a>
                 <div class="d-flex">
                     <a href="{{route('admin.posts.edit', $post)}}" class="btn btn-warning"><i class="fa-solid fa-pencil"></i> Edit</a>
-                    <form action="{{route('admin.posts.destroy', $post)}}" method="POST">
+                    <form action="{{route('admin.posts.destroy', $post)}}" method="POST" class="delete-form">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger ml-1"><i class="fa-solid fa-trash"></i> Delete</button>
