@@ -23,6 +23,7 @@ class PostSeeder extends Seeder
 
             $new_post->title = $faker->text(30);
             $new_post->slug = Str::slug($new_post->title, '-');
+            $new_post->user_id = 1;
             $new_post->category_id = Arr::random($categories_id);
             $new_post->content = $faker->paragraphs(2, true);
             $new_post->image = $faker->imageUrl(400, 400);

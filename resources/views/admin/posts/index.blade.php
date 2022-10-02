@@ -13,6 +13,7 @@
         <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
+        <th scope="col">Author</th>
         <th scope="col">Category</th>
         <th scope="col">Content</th>
         <th scope="col">Last update</th>
@@ -24,6 +25,7 @@
             <tr>
                 <th scope="row">{{$post->id}}</th>
                 <td>{{$post->title}}</td>
+                <th scope="row">{{$post->user->name}}</th>
                 @if($post->category)
                     <td><span class="badge badge-pill badge-{{$post->category->color ?? 'info'}}">{{$post->category->label}}</span></td>
                 @else

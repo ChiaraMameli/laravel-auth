@@ -45,12 +45,16 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'label' => 'required|string|unique:categories',
+            'color' => 'required|string',
+
 
         ],
         [
             'label.required' => 'This field cannot be left blank',
-            'title.string' => 'The file format is invalid',
+            'label.string' => 'The file format is invalid',
             'label.unique' => "$request->label alredy exists",
+
+            'color.required' => 'This field cannot be left blank',
         ]);
 
 
@@ -102,11 +106,14 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'label' => ['required', 'string', Rule::unique('categories')->ignore($category->id)],
+            'color' => 'required|string',
         ],
         [
             'label.required' => 'This field cannot be left blank',
             'label.string' => 'The file format is invalid',
             'label.unique' => "$request->label alredy exists",
+
+            'color.required' => 'This field cannot be left blank',
         ]);
 
         $data = $request->all();

@@ -14,6 +14,8 @@
         <th scope="col">#</th>
         <th scope="col">Label</th>
         <th scope="col">Color</th>
+        <th scope="col">Posts</th>
+        <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +24,7 @@
                 <th scope="row">{{$category->id}}</th>
                 <td>{{$category->label}}</td>
                 <td>{{$category->color}}</td>
+                <td>{{count($category->posts)}}</td>
                 <td>
                     <div class="d-flex">
                         <a href="{{route('admin.categories.show', $category)}}" class="btn btn-primary btn-sm ml-1"><i class="fa-solid fa-eye"></i></a>
@@ -36,7 +39,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="3">No categories found</td>
+                <td colspan="5">No categories found</td>
             </tr>
         @endforelse
     </tbody>
