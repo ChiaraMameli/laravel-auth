@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -34,7 +35,9 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories = Category::all();
-        return view('admin.posts.create', compact('post', 'categories'));
+        $tags = Tag::all();
+        $current_tags = $post->tags->pluck('id')->toArray();
+        return view('admin.posts.create', compact('post', 'categories', 'tags', 'current_tags'));
     }
 
     /**
@@ -49,7 +52,8 @@ class PostController extends Controller
             'title' => 'required|string|min:1|max:50|unique:posts',
             'content' => 'nullable|string',
             'image' => 'nullable|url',
-            'category_id' => 'nullable|exists:categories, id',
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id',
 
         ],
         [
@@ -64,7 +68,7 @@ class PostController extends Controller
             'image.url' => 'The file format is invalid',
 
             'category_id.exists' => 'Selected category does not exists',
-
+            'tags.exists' => 'Selected tag does not exists',
         ]);
 
 
@@ -77,6 +81,10 @@ class PostController extends Controller
         $post->slug = Str::slug($data['title'], '-');
 
         $post->save();
+
+        if(array_key_exists('tags', $data)){
+            $post->tags()->attach($data['tags']);
+        };
 
         return redirect()->route('admin.posts.index')->with('message', 'Post was successfully created')->with('type', 'success');
 
@@ -91,8 +99,8 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $categories = Category::all();
-
-        return view('admin.posts.show', compact('post', 'categories'));
+        $tags = Tag::select('id', 'label')->get();
+        return view('admin.posts.show', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -103,8 +111,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $categories = Category::select('id', 'label')->get();
+        $tags = Tag::select('id', 'label')->get();
+        $current_tags = $post->tags->pluck('id')->toArray();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'current_tags'));
     }
 
     /**
@@ -121,6 +131,7 @@ class PostController extends Controller
             'content' => 'nullable|string',
             'image' => 'nullable|url',
             'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id',
         ],
         [
             'title.required' => 'This field cannot be left blank',
@@ -135,6 +146,7 @@ class PostController extends Controller
 
             'category_id.exists' => 'Selected category does not exists',
 
+            'tags.exists' => 'Selected tag does not exists',
         ]);
 
         $data = $request->all();
@@ -142,6 +154,12 @@ class PostController extends Controller
         $data['slug'] = Str::slug($request->title, '-');
 
         $post->update($data);
+
+        if(array_key_exists('tags', $data)){
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
+        }
 
         return redirect()->route('admin.posts.show', $post)->with('message', 'Post was successfully edited')->with('type', 'success');
     }
@@ -154,7 +172,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if(count($post->tags)){
+            $post->tags->detach();
+        }
+
         $post->delete();
+
         return redirect()->route('admin.posts.index')->with('message', 'Post was successfully deleted')->with('type', 'success');
     }
 }

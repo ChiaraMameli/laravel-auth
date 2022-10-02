@@ -25,6 +25,22 @@
                 @endforeach
             </select>
         </div>
+
+        <div class="col-12">
+            <h5>Tags</h5>
+                @if(count($tags))
+                    @foreach($tags as $tag)
+                    <div class="form-check form-check-inline mb-3">
+                        <input class="form-check-input" type="checkbox" id="tag-{{$tag->label}}" name="tags[]" value="{{$tag->id}}" @if(in_array($tag->id, old('tags', $current_tags))) checked @endif>
+                        <label class="form-check-label" for="tag-{{$tag->label}}">
+                            {{$tag->label}}
+                        </label>
+                    </div>
+                    @endforeach
+                @endif
+                
+        </div>
+
         <div class="col-12 form-group">
             <label for="content">Content</label>
             <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="5">{{old('content', $post->content)}}</textarea>

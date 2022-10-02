@@ -15,6 +15,7 @@
         <th scope="col">Title</th>
         <th scope="col">Author</th>
         <th scope="col">Category</th>
+        <th scope="col">Tags</th>
         <th scope="col">Content</th>
         <th scope="col">Last update</th>
         <th scope="col">Actions</th>
@@ -25,12 +26,27 @@
             <tr>
                 <th scope="row">{{$post->id}}</th>
                 <td>{{$post->title}}</td>
+                
+                @if($post->user)
                 <th scope="row">{{$post->user->name}}</th>
+                @else
+                    <td>No author found</td>
+                @endif
+
                 @if($post->category)
-                    <td><span class="badge badge-pill badge-{{$post->category->color ?? 'info'}}">{{$post->category->label}}</span></td>
+                    <td><span class="badge badge-pill badge-{{$post->category->color ?? 'info'}}" style="width: 4rem">{{$post->category->label}}</span></td>
                 @else
                     <td>No category found</td>
                 @endif
+
+                @forelse($post->tags as $tag)
+                    <td class="d-flex flex-column">
+                        <span class="badge badge-{{$tag->color_tag}}" style="width: 4rem">{{$tag->label}}</span>
+                    </td>
+                @empty
+                    <td>No tag found</td>
+                @endforelse
+                    
                 <td>{{$post->content}}</td>
                 <td>{{$post->updated_at}}</td>
                 <td>
