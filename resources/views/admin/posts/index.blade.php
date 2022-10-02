@@ -25,7 +25,7 @@
                 <th scope="row">{{$post->id}}</th>
                 <td>{{$post->title}}</td>
                 @if($post->category)
-                    <td><span class="badge badge-pill badge-{{$post->category->color}}">{{$post->category->label}}</span></td>
+                    <td><span class="badge badge-pill badge-{{$post->category->color ?? 'info'}}">{{$post->category->label}}</span></td>
                 @else
                     <td>No category found</td>
                 @endif

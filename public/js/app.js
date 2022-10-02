@@ -37359,7 +37359,7 @@ var deleteForm = document.querySelectorAll('.delete-form');
 deleteForm.forEach(function (form) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var hasConfirmed = confirm('You really want to delete this post?');
+    var hasConfirmed = confirm("You really want to delete this element?");
     if (hasConfirmed) form.submit();
   });
 });

@@ -24,6 +24,9 @@ Route::middleware('auth')->prefix('/admin')->namespace('Admin')->name('admin.')-
     // Posts
     Route::resource('posts', 'PostController');
 
+    //Category
+    Route::resource('categories', 'CategoryController');
+
     Route::get('/{any}', function () {
         abort('404');
     })->where('any', '.*');
