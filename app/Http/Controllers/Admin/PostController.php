@@ -38,8 +38,9 @@ class PostController extends Controller
         $post = new Post();
         $categories = Category::all();
         $tags = Tag::all();
+        $user = Auth::user();
         $current_tags = $post->tags->pluck('id')->toArray();
-        return view('admin.posts.create', compact('post', 'categories', 'tags', 'current_tags'));
+        return view('admin.posts.create', compact('post', 'categories', 'tags', 'current_tags', 'user'));
     }
 
     /**
