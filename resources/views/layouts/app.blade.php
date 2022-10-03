@@ -37,12 +37,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <li><a class="nav-link @if(Route::is('admin.posts.index')) active @endif" href="{{ route('admin.posts.index') }}">Posts</a></li>
-                        <li><a class="nav-link @if(Route::is('admin.categories.index')) active @endif" href="{{ route('admin.categories.index') }}">Categories</a></li>
-                        <li><a class="nav-link @if(Route::is('admin.tags.index')) active @endif" href="{{ route('admin.tags.index') }}">Tags</a></li>
-                    </ul>
-
+                    @auth
+                        @include('includes.admin.navbar_header')
+                    @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
