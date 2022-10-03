@@ -57,8 +57,18 @@
             @enderror
 
         </div>
+
         <div class="col-2 form-group">
             <img id="image-preview" class="img-fluid rounded" src="https://troianiortodonzia.it/wp-content/uploads/2016/10/orionthemes-placeholder-image.png" alt="placeholder">
+        </div>
+
+        <div class="col-12">
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="switch_author" name="switch_author" @if(old('switch_author')) checked @endif>
+                <label class="form-check-label" for="switch_author">
+                    Sign me as author <br/> <strong>Previous author:</strong> {{$post->user->name}}
+                </label>
+            </div>
         </div>
 
         <a href="{{route('admin.posts.index', $post)}}" class="btn btn-secondary ml-3"><i class="fa-solid fa-rotate-left"></i> Go Back</a>

@@ -15,7 +15,12 @@
             <div class="card-body">
                 <h5 class="card-title">{{$post->title}}</h5>
                 <p class="card-text">{{$post->content}}</p>
+
+                @if($post->category)
                 <p class="card-text"><strong>Category: </strong>{{$post->category->label}}</p>
+                @endif
+
+                <p class="card-text"><strong>Author: </strong>{{$post->user->name ?? 'Unknown'}}</p>
                 <p class="card-text"><strong>Last update: </strong><time>{{$post->updated_at}}</time></p>
             </div>
             <div class="card-footer d-flex justify-content-between">

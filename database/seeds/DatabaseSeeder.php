@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UserDetailSeeder::class, 
             TagSeeder::class, 
             CategorySeeder::class, 
-            PostSeeder::class]);
+            PostSeeder::class
+        ]);
     }
 }

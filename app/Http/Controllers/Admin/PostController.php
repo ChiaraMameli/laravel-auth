@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostController extends Controller
@@ -99,8 +101,9 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $categories = Category::all();
+        $users = User::all();
         $tags = Tag::select('id', 'label')->get();
-        return view('admin.posts.show', compact('post', 'categories', 'tags'));
+        return view('admin.posts.show', compact('post', 'categories', 'users', 'tags'));
     }
 
     /**
@@ -152,6 +155,10 @@ class PostController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->title, '-');
+
+        if(array_key_exists('switch_author', $data)){
+            $post->user_id = Auth::id();
+        }
 
         $post->update($data);
 
