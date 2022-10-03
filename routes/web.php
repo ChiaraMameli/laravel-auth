@@ -27,6 +27,10 @@ Route::middleware('auth')->prefix('/admin')->namespace('Admin')->name('admin.')-
     //Category
     Route::resource('categories', 'CategoryController');
 
+    //Tag
+    Route::resource('tags', 'TagController');
+
+
     Route::get('/{any}', function () {
         abort('404');
     })->where('any', '.*');

@@ -120,7 +120,7 @@ class CategoryController extends Controller
 
         $category->update($data);
 
-        return redirect()->route('admin.categories.show', $post)->with('message', 'Category was successfully edited')->with('type', 'success');
+        return redirect()->route('admin.categories.show', $category)->with('message', 'Category was successfully edited')->with('type', 'success');
 
     }
 
@@ -134,6 +134,5 @@ class CategoryController extends Controller
     {
         $category->delete();
         return redirect()->route('admin.categories.index')->with('message', 'Category was successfully deleted')->with('type', 'success');
-
     }
 }
